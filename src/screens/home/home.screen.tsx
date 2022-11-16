@@ -1,21 +1,17 @@
-import {Image, SafeAreaView, View} from 'react-native';
-import {
-  ActivityIndicator,
-  Button,
-  Card,
-  FAB,
-  IconButton,
-  List,
-  Title,
-} from 'react-native-paper';
+import {Image, SafeAreaView} from 'react-native';
+import {FAB} from 'react-native-paper';
 import MapView, {Marker} from 'react-native-maps';
 import {homeScreenStyle} from './home.screen.style';
 import React from 'react';
+import {HeaderComponent} from '../../components/header/header.component';
+import {ConfirmDeliveryCardComponent} from '../../components/confirm-delivery-card/confirm-delivery-card.component';
+import {SearchingDeliveryComponent} from '../../components/searching-delivery/searching-delivery.component';
 
 const HomeScreen = () => {
   const state: number = 2;
   return (
     <SafeAreaView style={homeScreenStyle.flex}>
+      <HeaderComponent title="Delivery App" />
       <MapView
         style={homeScreenStyle.flex}
         initialRegion={{
@@ -45,41 +41,9 @@ const HomeScreen = () => {
           </>
         ) : null}
       </MapView>
-      {state == 2 ? (
-        <Card>
-          <Card.Content>
-            <List.Item
-              title="$ 15.00"
-              description="Total price of delivery"
-              right={() => (
-                <View>
-                  <Button style={homeScreenStyle.cancelButton}>Cancel</Button>
-                  <Button mode="contained">Confirm</Button>
-                </View>
-              )}
-              left={() => (
-                <IconButton
-                  icon="bike"
-                  size={30}
-                  style={homeScreenStyle.icon}
-                  color={homeScreenStyle.icon.color}
-                />
-              )}></List.Item>
-          </Card.Content>
-        </Card>
-      ) : null}
-      {state == 1 ? <FAB icon="plus" style={homeScreenStyle.fab} /> : null}
-      {state == 3 ? (
-        <View style={homeScreenStyle.flexCenterColumn}>
-          <ActivityIndicator animating={true} />
-          <Title style={homeScreenStyle.title}>
-            Searching for a delivery person in your region
-          </Title>
-          <Button mode="contained" style={homeScreenStyle.cancelDeliveryButton}>
-            Cancel
-          </Button>
-        </View>
-      ) : null}
+      {/* {state == 1 ? <FAB icon="plus" style={homeScreenStyle.fab} /> : null}
+      {state == 2 ? <ConfirmDeliveryCardComponent /> : null}
+      {state == 3 ? <SearchingDeliveryComponent /> : null} */}
     </SafeAreaView>
   );
 };
