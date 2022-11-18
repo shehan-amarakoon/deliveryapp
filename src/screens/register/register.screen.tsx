@@ -1,10 +1,16 @@
+import {useLinkProps} from '@react-navigation/native';
 import React from 'react';
 import {SafeAreaView, ScrollView, View} from 'react-native';
 import {Appbar, Button, TextInput} from 'react-native-paper';
 import {HeaderComponent} from '../../components/header/header.component';
 import {registerScreenStyle} from './register.screen.style';
 
-export const RegisterScreen = () => {
+interface RegisterScreenProps {
+  navigation: any;
+}
+
+export const RegisterScreen = (props: RegisterScreenProps) => {
+  const register = () => props.navigation.navigate('Home');
   return (
     <SafeAreaView>
       <ScrollView>
@@ -33,7 +39,10 @@ export const RegisterScreen = () => {
             }
           />
           <TextInput label="Phone number" keyboardType="phone-pad" />
-          <Button mode="contained" style={registerScreenStyle.button}>
+          <Button
+            mode="contained"
+            style={registerScreenStyle.button}
+            onPress={register}>
             Register
           </Button>
         </View>

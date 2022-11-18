@@ -4,10 +4,18 @@ import MapView from 'react-native-maps';
 import {deliveryScreenStyle} from './delivery.screen.style';
 import {Avatar, Card, List} from 'react-native-paper';
 
-const DeliveryScreen = () => {
+interface DeliveryScreenProps {
+  navigation: any;
+}
+
+const DeliveryScreen = (props: DeliveryScreenProps) => {
   return (
     <SafeAreaView style={deliveryScreenStyle.flex}>
-      <HeaderComponent title="Delivery details" hasBackButton={true} />
+      <HeaderComponent
+        title="Delivery details"
+        hasBackButton={true}
+        navigation={props.navigation}
+      />
       <View style={deliveryScreenStyle.flex}>
         <MapView
           initialRegion={{

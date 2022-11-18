@@ -5,7 +5,9 @@ import {searchingDeliveryComponentStyle} from './searching-delivery.component.st
 
 export const SearchingDeliveryComponent = () => {
   return (
-    <View style={searchingDeliveryComponentStyle.flexCenterColumn}>
+    <View
+      testID="searchDeliveryCard"
+      style={searchingDeliveryComponentStyle.flexCenterColumn}>
       <ActivityIndicator animating={true} />
       <Title style={searchingDeliveryComponentStyle.title}>
         Searching for a delivery person in your region

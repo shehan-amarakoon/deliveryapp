@@ -1,4 +1,4 @@
-import {Image, SafeAreaView} from 'react-native';
+import {Image} from 'react-native';
 import {FAB} from 'react-native-paper';
 import MapView, {Marker} from 'react-native-maps';
 import {homeScreenStyle} from './home.screen.style';
@@ -6,13 +6,22 @@ import React from 'react';
 import {HeaderComponent} from '../../components/header/header.component';
 import {ConfirmDeliveryCardComponent} from '../../components/confirm-delivery-card/confirm-delivery-card.component';
 import {SearchingDeliveryComponent} from '../../components/searching-delivery/searching-delivery.component';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
-const HomeScreen = () => {
-  const state: number = 2;
+interface HomeScreenProps {
+  navigation: any;
+  state: number;
+}
+const HomeScreen = (props: HomeScreenProps) => {
+  const goToDeliveryRoute = () => props.navigation.navigate('DeliveryRoute');
+
+  const state: number = props.state || 1;
+
   return (
-    <SafeAreaView style={homeScreenStyle.flex}>
-      <HeaderComponent title="Delivery App" />
+    <SafeAreaView style={homeScreenStyle.flex} edges={['top']}>
+      <HeaderComponent title="Delivery App" navigation={props.navigation} />
       <MapView
+        testID="mapView"
         style={homeScreenStyle.flex}
         initialRegion={{
           latitude: -3.722,
@@ -41,9 +50,16 @@ const HomeScreen = () => {
           </>
         ) : null}
       </MapView>
-      {/* {state == 1 ? <FAB icon="plus" style={homeScreenStyle.fab} /> : null}
+      {state == 1 ? (
+        <FAB
+          icon="plus"
+          color={homeScreenStyle.fab.color}
+          style={homeScreenStyle.fab}
+          onPress={goToDeliveryRoute}
+        />
+      ) : null}
       {state == 2 ? <ConfirmDeliveryCardComponent /> : null}
-      {state == 3 ? <SearchingDeliveryComponent /> : null} */}
+      {state == 3 ? <SearchingDeliveryComponent /> : null}
     </SafeAreaView>
   );
 };
